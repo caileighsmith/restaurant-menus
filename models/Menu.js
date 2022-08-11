@@ -1,6 +1,19 @@
-const {sequelize} = require('../db');
-const { Sequelize } = require('sequelize');
+const {db} = require('../db');
+const { Sequelize, DataTypes } = require('sequelize');
 
 // TODO - create a Menu model
 
-module.exports = {Menu};
+const Menu = db.define('menu', {
+
+    title: {
+        type: DataTypes.STRING
+    }
+})
+
+async function main(){
+    await Menu.sync({force: true})
+    await Menu.create({
+        title: 'Saver Menu'
+    })
+}
+module.exports = { Menu };
